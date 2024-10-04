@@ -1,16 +1,25 @@
-import { PrismaClient } from "@prisma/client/";
+import { PrismaClient } from "@prisma/client";
+import Link from "next/link";
 const client = new PrismaClient();
 
 async function fetchData() {
     const all_users = await client.user.findMany();
-    console.log(all_users);
+    return all_users;
 }
 
-export default function () {
-    fetchData();
+export default async function () {
+    const data = await fetchData();
     return (
         <div>
-            <h1>this is user page</h1>
+            {data.map((user) => (
+                <div key={user.id}>
+                    <p>{user.username} </p>
+                    <p>{user.firstName} </p>
+                    <p>{user.lastName} </p>
+                    <Link href={`/user/${user.id}`}><button>edit</button></Link>
+                    <hr />
+                </div>
+            ))}
         </div>
     )
 }
