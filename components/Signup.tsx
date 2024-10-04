@@ -1,22 +1,37 @@
+"use client"
 import axios from "axios";
-import Link from "next/link";
+import { useRef } from "react"
 
-async function getData() {
-    const res = await axios.get('https://backend-ddtz.onrender.com/todos');
-    return res.data;
-}
-export async function Signup() {
-    const data = await getData();
+
+export function Signup() {
+    const firstNameRef = useRef<HTMLInputElement>(null);
+    const lastNameRef = useRef<HTMLInputElement>(null);
+    const usernameRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    function submitHandler() {
+        const firstName = firstNameRef.current?.value;
+        const lastName = lastNameRef.current?.value;
+        const username = usernameRef.current?.value;
+        const password = passwordRef.current?.value;
+
+        // console.log(firstName, lastName, username, password);
+
+        axios.post('http://localhost:3000/api/signup', {
+            firstName,
+            lastName,
+            username,
+            password
+        });
+        
+    }
+    console.log('testing re rendering');
     return (
         <div>
-            <h1>this is home page</h1>
-            {data.all_todo.map((todo: any) => (
-                <div key={todo._id}>
-                    <h2>Title: {todo.title}</h2>
-                    <p>Description: {todo.description} </p>
-                </div>
-            ))}
-            <Link href={'/testing'}>go to testing</Link>
+            <input ref={firstNameRef} type="text" placeholder="first name" /> <br />
+            <input ref={lastNameRef} type="text" placeholder="last name" /> <br />
+            <input ref={usernameRef} type="text" placeholder="username " /> <br />
+            <input ref={passwordRef} type="text" placeholder="password" /> <br />
+            <button onClick={submitHandler}>sumbit</button>
         </div>
     )
 }
