@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import Link from "next/link";
 
-const client = new PrismaClient();
+import Link from "next/link";
+import client from "@/lib/Singleton_prisma";
 
 async function fetchData() {
     const all_users = await client.user.findMany();
@@ -17,7 +16,7 @@ export default async function () {
                     <p>{user.username} </p>
                     <p>{user.firstName} </p>
                     <p>{user.lastName} </p>
-                    <Link href={`/user/${user.id}`}><button>edit</button></Link>
+                    <Link href={`/users/${user.id}`}><button>edit</button></Link>
                     <hr />
                 </div>
             ))}
