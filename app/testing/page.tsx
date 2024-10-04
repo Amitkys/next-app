@@ -1,7 +1,9 @@
+import Link from "next/link";
+
 export default function testing() {
     return (
         <div>
-            <h1> this is testing page</h1>
+        <Link href={"/"} >go to home</Link>
         </div>
     )
 }
