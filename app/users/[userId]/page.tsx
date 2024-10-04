@@ -14,6 +14,9 @@ export default async function User({ params }: { params: { userId: string } }) {
     return (
         <div>
             {/* <h1>This is user ID page {params.userId} </h1> */}
+            <p>username: {data?.username} </p>
+            <p>username: {data?.firstName} </p>
+            <p>username: {data?.lastName} </p>
         </div>
     );
 }
