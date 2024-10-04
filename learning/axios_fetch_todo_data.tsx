@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 async function getData() {
     const res = await axios.get('https://backend-ddtz.onrender.com/todos');
     return res.data;
