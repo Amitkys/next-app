@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
+
 const client = new PrismaClient();
 
 async function fetchData() {
